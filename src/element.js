@@ -4,6 +4,7 @@ class AuthorOptionElement extends AuthorBaseElement(HTMLElement) {
 
     this.UTIL.defineAttributes({
       disabled: false,
+      hidden: false,
       hover: false,
       id: '',
       label: '',
