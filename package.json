@@ -4,7 +4,8 @@
   "description": "author-option custom element (web component).",
   "main": "dist/author-option.min.js",
   "scripts": {
-    "build": "npm run clean && rollup -c ./rollup.release.config.js && npm run build-showroom",
+    "build": "npm run clean && rollup -c ./rollup.release.config.js",
+    "build-dev": "npm run build && npm run build-showroom",
     "build-showroom": "cd showroom/ && npm run build && cd ../",
     "clean": "node clean.js",
     "deploy": "npm run build && npm publish --access public",
