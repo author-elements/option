@@ -43,8 +43,7 @@ class AuthorOptionElement extends AuthorBaseElement(HTMLElement) {
           return
         }
 
-        let { shiftKey, metaKey, ctrlKey } = evt
-        this.PRIVATE.select(true, metaKey, ctrlKey, mousedown)
+        this.PRIVATE.select(true, evt.metaKey, evt.ctrlKey, mousedown)
       },
 
       parentStateChangeHandler: evt => {
@@ -53,8 +52,6 @@ class AuthorOptionElement extends AuthorBaseElement(HTMLElement) {
         switch (name) {
           case 'multiple':
             return this.PRIVATE.setMode(value ? 'select-multiple' : 'select-one')
-
-          default: return
         }
       },
 
@@ -62,15 +59,11 @@ class AuthorOptionElement extends AuthorBaseElement(HTMLElement) {
         switch (mode) {
           case 'select-multiple':
             this.off('mouseup', this.PRIVATE.selectionHandler)
-            this.on('mousedown', this.PRIVATE.selectionHandler)
-            break
+            return this.on('mousedown', this.PRIVATE.selectionHandler)
 
           case 'select-one':
             this.on('mouseup', this.PRIVATE.selectionHandler)
-            this.off('mousedown', this.PRIVATE.selectionHandler)
-            break
-
-          default: return
+            return this.off('mousedown', this.PRIVATE.selectionHandler)
         }
       },
 
@@ -104,7 +97,7 @@ class AuthorOptionElement extends AuthorBaseElement(HTMLElement) {
   }
 
   static get observedAttributes () {
-    return ['disabled', 'hover', 'label', 'selected', 'value']
+    return ['disabled', 'hidden', 'hover', 'label', 'selected', 'value']
   }
 
   get text () {
